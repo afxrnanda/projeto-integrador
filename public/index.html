@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualidade do Ar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Monitor de Qualidade do Ar</h1>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#air-quality">Qualidade do Ar</a></li>
+                <li><a href="#pollution-causes">Causa da Poluição</a></li>
+                <li><a href="#news">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção Inicial -->
+    <section id="home" class="section">
+        <div class="container">
+            <h2>Bem-vindo!</h2>
+            <p>Explore dados sobre a qualidade do ar e fique informado sobre os problemas ambientais da sua região.</p>
+        </div>
+    </section>
+
+    <!-- Seção de Qualidade do Ar -->
+    <section id="air-quality" class="section">
+        <div class="container">
+            <h2>Qualidade do Ar Hoje</h2>
+            <div class="info-cards">
+                <div class="card">
+                    <h3>Índice de Poluição</h3>
+                    <p id="pollution-index">--</p>
+                </div>
+                <div class="card">
+                    <h3>Umidade do Ar</h3>
+                    <p id="humidity">--</p>
+                </div>
+                <div class="card">
+                    <h3>Qualidade boa para sair</h3>
+                    <p id="quality">--</p>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="city-search" placeholder="Digite o nome da cidade" />
+                <button id="search-btn">Pesquisar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Causa da Poluição -->
+    <section id="pollution-causes" class="section">
+        <div class="container">
+            <h2>Causas da Poluição</h2>
+            <p>Entenda os principais fatores que contribuem para a poluição do ar:</p>
+            <ul class="causes-list">
+                <li>Emissão de gases industriais e veículos.</li>
+                <li>Queimadas e desmatamento.</li>
+                <li>Uso excessivo de combustíveis fósseis.</li>
+                <li>Atividades agrícolas que liberam metano e amônia.</li>
+                <li>Manejo inadequado de resíduos sólidos.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Seção das Notícias -->
+    <section id="news" class="section">
+        <div class="container">
+            <h2>Notícias Recentes</h2>
+            <div class="news-cards">
+                <!-- Exemplo de cartão de notícia -->
+                <div class="news-card">
+                    <img src="https://via.placeholder.com/150" alt="Notícia">
+                    <div class="news-content">
+                        <h3>Título da Notícia</h3>
+                        <p>Resumo breve sobre a notícia...</p>
+                        <a href="https://www.youtube.com/watch?v=365ile92GOU&ab_channel=BolsonaroM%C3%BAsicas">Leia mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Conecte-se conosco:</p>
+        <a href="#">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="#">GitHub</a>
+    </footer>
+</body>
+</html>
