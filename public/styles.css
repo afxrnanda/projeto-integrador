@@ -1,0 +1,270 @@
+/* Reseta estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #FFFFFF, #E0E2DB, #D2D4C8, #B8BDB5, #889696, #5F7470);
+    color: #333;
+}
+
+header {
+    background-color: #5F7470;
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+}
+
+header ul li {
+    margin-left: 1rem;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+header ul li a:hover {
+    color: #ccc;
+}
+
+.section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.home-image {
+    width: 70%;
+    border-radius: 10px;
+    order: 1;
+}
+
+.home-text h2 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.home-text p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* Ajuste dos cards superiores */
+.info-cards {
+    display: flex;
+    gap: 2rem; /* Espaçamento entre os cards superiores */
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 30%; /* Largura ajustada para cada card superior */
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card de recomendações com largura combinada */
+.recommendations {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.recommendations .card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: calc(30% * 2 + 2rem); /* Soma das larguras dos dois cards superiores + gap */
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-image {
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+.pollution-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.pollution-image {
+    width: 60%;
+    border-radius: 10px;
+    order: -1;
+}
+
+.pollution-text h2 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.pollution-text p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.causes-list li {
+    margin-bottom: 1rem;
+}
+
+.search-bar {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    padding: 0.8rem 1rem;
+    background-color: #5F7470;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-bar button:hover {
+    background-color: #4a5e5b;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.carousel-item {
+    min-width: 300px;
+    flex-shrink: 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.news-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #5F7470;
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.social-links .line {
+    width: 20%;
+    height: 2px;
+    background-color: black;
+}
+
+.social-links img {
+    width: 30px;
+}
+
+.logo img {
+    width: 100px;
+    margin-top: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .home-content, .pollution-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-image, .pollution-image {
+        width: 100%;
+    }
+
+    .info-cards {
+        flex-direction: column;
+    }
+
+    header ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Ajuste para alinhar o card de Recomendações com os demais */
+.recommendations {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.recommendations .card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 30%;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
