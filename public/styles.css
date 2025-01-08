@@ -78,41 +78,26 @@ header ul li a:hover {
     margin-top: 1rem;
 }
 
-/* Ajuste dos cards superiores */
-.info-cards {
-    display: flex;
-    gap: 2rem; /* Espaçamento entre os cards superiores */
-    justify-content: center;
-    margin-top: 1rem;
-}
-
 .card {
     text-align: center;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: 30%; /* Largura ajustada para cada card superior */
     background: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Card de recomendações com largura combinada */
-.recommendations {
+.info-cards {
     display: flex;
-    justify-content: center;
-    margin-top: 1rem;
 }
 
-.recommendations .card {
-    text-align: center;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    width: calc(30% * 2 + 2rem); /* Soma das larguras dos dois cards superiores + gap */
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.card-poluicao, .card-umidade{
+    width: 50%;
 }
 
+.car-recomendacao {
+    width: 100%;
+}
 
 .card-image {
     width: 50%;
@@ -231,7 +216,7 @@ footer {
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     .home-content, .pollution-content {
         flex-direction: column;
         text-align: center;
@@ -245,26 +230,12 @@ footer {
         flex-direction: column;
     }
 
+    .card-poluicao, .card-umidade {
+        width: 100%;
+    }
+
     header ul {
         flex-direction: column;
         gap: 0.5rem;
     }
-}
-
-/* Ajuste para alinhar o card de Recomendações com os demais */
-.recommendations {
-    display: flex;
-    gap: 2rem;
-    justify-content: space-around;
-    margin-top: 1rem;
-}
-
-.recommendations .card {
-    text-align: center;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    width: 30%;
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
