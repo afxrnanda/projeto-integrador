@@ -1,4 +1,4 @@
-const Nossa_chave = '9ab2a85cf7af47cd36504729e28e212d';  // Essa é a nossa Chave da API key
+const Nossa_chave = '9ab2a85cf7af47cd36504729e28e212d'; // Chave da API
 const ApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 const cityInput = document.getElementById('city-search');
@@ -7,8 +7,7 @@ const pollutionIndex = document.getElementById('pollution-index');
 const humidity = document.getElementById('humidity');
 const quality = document.getElementById('quality');
 
-// A API do OpenWeather fornece dados de qualidade do ar a partir de coordenadas geográficas (latitude e longitude). No entanto, ao buscar informações apenas pelo nome da cidade, surgiu uma dificuldade, já que a API exige as coordenadas para fornecer os dados de qualidade do ar. Para resolver isso, foi desenvolvida uma função que, ao encontrar uma cidade, retorna suas coordenadas geográficas.
-
+// Função para buscar coordenadas da cidade
 async function BuscarCoordenadas(cidade) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${Nossa_chave}`;
     try {
@@ -19,7 +18,7 @@ async function BuscarCoordenadas(cidade) {
         return {
             lat: coord.lat,
             lon: coord.lon,
-            humidity: main.humidity  
+            humidity: main.humidity
         };
     } catch (error) {
         console.error('Erro ao buscar coordenadas:', error);
@@ -28,35 +27,58 @@ async function BuscarCoordenadas(cidade) {
     }
 }
 
-// Função para buscar a qualidade do ar com base nas coordenadas (lat, lon) que foram encontradas na função Buscar Coordenadas
+// Função para buscar a qualidade do ar
 async function BuscarQualidade(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${Nossa_chave}`;
-    
-    const response = await fetch(url);
-    
-    if (!response.ok) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Erro ao buscar dados de qualidade do ar.');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao buscar qualidade do ar:', error);
         alert('Erro ao buscar dados de qualidade do ar.');
-        return null; // Retorna null caso haja erro
+        return null;
     }
-
-    const data = await response.json();
-    return data;
 }
 
-// Função para atualizar os dados no HTML
+// Função para gerar recomendações baseadas no índice de qualidade do ar
+function GerarRecomendacao(aqi) {
+    let recomendacao = '';
+    switch (aqi) {
+        case 1:
+            recomendacao = 'A qualidade do ar está boa. Você pode realizar atividades ao ar livre sem preocupações.';
+            break;
+        case 2:
+            recomendacao = 'A qualidade do ar está moderada. Pessoas sensíveis devem limitar atividades físicas ao ar livre.';
+            break;
+        case 3:
+            recomendacao = 'A qualidade do ar está ruim. Reduza atividades ao ar livre, especialmente pessoas com problemas respiratórios.';
+            break;
+        case 4:
+            recomendacao = 'A qualidade do ar está muito ruim. Evite sair e mantenha janelas fechadas.';
+            break;
+        case 5:
+            recomendacao = 'A qualidade do ar está perigosa. Fique em ambientes fechados e use máscara ao sair.';
+            break;
+        default:
+            recomendacao = 'Não foi possível determinar a qualidade do ar.';
+    }
+    return recomendacao;
+}
+
+// Atualizar os dados no HTML
 function Atualizar(data) {
     if (!data || !data.list) return;
 
     const pollutionData = data.list[0];
-    pollutionIndex.innerText = pollutionData.main.aqi;
-    if (pollutionData.main.aqi <= 2) {
-        quality.innerText = 'Sim, está boa!';
-    } else {
-        quality.innerText = 'Não, evite sair.';
-    }
+    const aqi = pollutionData.main.aqi;
+
+    pollutionIndex.innerText = aqi;
+    quality.innerText = GerarRecomendacao(aqi);
 }
 
-// Ao clicar no botão de pesquisa
+// Evento ao clicar no botão de pesquisa
 searchBtn.addEventListener('click', async () => {
     const cidade = cityInput.value.trim();
     if (!cidade) {
@@ -69,7 +91,7 @@ searchBtn.addEventListener('click', async () => {
     if (!coordData) return;
 
     // Exibir umidade no HTML
-    humidity.innerText = `${coordData.humidity} %`;  // Exibir a umidade
+    humidity.innerText = `${coordData.humidity} %`;
 
     // Passo 2: Buscar qualidade do ar usando lat e lon
     const data = await BuscarQualidade(coordData.lat, coordData.lon);
