@@ -12,13 +12,29 @@ body {
     color: #333;
 }
 
+/* Reajustes na barra de navegação */
 header {
-    background-color: #5F7470;
+    background-color: rgba(95, 116, 112);
     color: #fff;
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+header .navbar-title {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.5rem; 
+    color: white;
+}
+
+header .navbar-title span.black {
+    color: black; /* Destaque preto */
+    font-size: 1.5rem; 
+}
+
+header .navbar-title span.white {
+    color: white; /* Destaque branco */
 }
 
 header nav {
@@ -33,22 +49,45 @@ header nav {
 header ul {
     list-style: none;
     display: flex;
+    gap: 2rem; /* Espaço entre os itens */
 }
 
 header ul li {
-    margin-left: 1rem;
+    position: relative; /* Necessário para o sublinhado */
 }
 
+/* Estilo do link da navbar */
 header ul li a {
-    color: white;
-    text-decoration: none;
+    font-family: 'Inter', sans-serif; 
     font-size: 1.2rem;
-    transition: color 0.3s;
+    font-weight: 800; 
+    color: white;
+    text-decoration: none; 
+    transition: all 0.3s ease; 
 }
 
-header ul li a:hover {
-    color: #ccc;
+/* Linha preta para hover */
+header ul li a::after {
+    content: ''; /* Cria a linha */
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    width: 0%; 
+    height: 2px; 
+    background-color: black; 
+    transition: width 0.3s ease; 
 }
+
+/* Animação no hover */
+header ul li a:hover::after {
+    width: 100%; 
+}
+
+/* Elemento selecionado com linha preta */
+header ul li a.selected::after {
+    width: 100%; 
+}
+
 
 .section {
     padding: 2rem;
@@ -185,13 +224,16 @@ header ul li a:hover {
     border-radius: 10px;
 }
 
+/* Estilização geral do rodapé */
 footer {
     text-align: center;
     padding: 1rem;
-    background: #5F7470;
+    background: rgba(95, 116, 112, 0.8); 
     color: white;
+    font-family: 'Aclonica', sans-serif;
 }
 
+/* Alinhamento horizontal da linha de ícones */
 .social-links {
     display: flex;
     justify-content: center;
@@ -201,7 +243,7 @@ footer {
 }
 
 .social-links .line {
-    width: 20%;
+    flex: 1;
     height: 2px;
     background-color: black;
 }
@@ -210,9 +252,40 @@ footer {
     width: 30px;
 }
 
-.logo img {
-    width: 100px;
-    margin-top: 1rem;
+/* Reajuste do rodapé */
+footer .footer-content {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: left;
+}
+
+/* Estilo para a logo */
+footer .logo img {
+    width: 90px;
+    filter: opacity(100%);
+}
+
+/* Estilo do título */
+footer .footer-title {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    line-height: 1.2;
+}
+
+footer .footer-title span.black {
+    color: black;
+    font-size: 1.5rem;
+}
+
+footer .footer-title span.white {
+    color: white;
 }
 
 /* Responsividade */
