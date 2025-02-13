@@ -1,5 +1,5 @@
 const Nossa_chave = '9ab2a85cf7af47cd36504729e28e212d'; // Chave da API
-const ApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const ApiUrl = 'https://api.openweathermap.org/data/2.5/weather'; //url do site
 
 const cityInput = document.getElementById('city-search');
 const searchBtn = document.getElementById('search-btn');
