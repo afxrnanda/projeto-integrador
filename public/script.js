@@ -27,6 +27,36 @@ async function BuscarCoordenadas(cidade) {
     }
 }
 
+// Função para o funcionamento do PopUp
+document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("emailPopup");
+    const closePopup = document.getElementById("closePopup");
+    const submitEmail = document.getElementById("submitEmail");
+    const emailInput = document.getElementById("emailInput");
+
+    // Função para fechar o pop-up
+    function closePopupFunction() {
+        popup.classList.add("hidden"); // Adiciona a classe "hidden" para esconder o pop-up
+    }
+
+    // Fechar o pop-up ao clicar no botão "Fechar"
+    closePopup.addEventListener("click", closePopupFunction);
+
+    // Fechar o pop-up ao clicar no botão "Inscrever-se" (após validação)
+    submitEmail.addEventListener("click", () => {
+        const email = emailInput.value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailPattern.test(email)) {
+            alert("Obrigado por se inscrever!");
+            closePopupFunction(); // Fecha o pop-up
+        } else {
+            alert("Por favor, insira um e-mail válido.");
+        }
+    });
+});
+
+
 // Função para buscar a qualidade do ar
 async function BuscarQualidade(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${Nossa_chave}`;

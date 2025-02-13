@@ -56,6 +56,59 @@ header ul li {
     position: relative; /* Necessário para o sublinhado */
 }
 
+/* Estilo do PopUp */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible; 
+    opacity: 1; 
+    transition: opacity 0.3s ease;
+}
+.popup-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+.popup-content h2 {
+    color: #5F7470;
+    font-family: 'Aclonica', sans-serif;
+}
+.popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+}
+.popup-content button {
+    background: #5F7470;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    flex: 1; 
+}
+.popup-content button:hover {
+    background: #4a5e5b;
+}
+
 /* Estilo do link da navbar */
 header ul li a {
     font-family: 'Inter', sans-serif; 
