@@ -18,6 +18,4 @@ db.run(`
   }
 });
 
-db.close();
-
 module.exports = db;

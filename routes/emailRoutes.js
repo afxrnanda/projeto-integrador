@@ -13,6 +13,7 @@ router.post('/subscribe', (req, res) => {
     const query = `INSERT INTO emails (email) VALUES (?)`;
     db.run(query, [email], function (err) {
       if (err) {
+        console.log(err)
         if (err.message.includes('UNIQUE')) {
           return res.status(409).json({ error: 'E-mail já cadastrado.' });
         }
