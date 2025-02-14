@@ -29,13 +29,14 @@ async function BuscarCoordenadas(cidade) {
 
 // Função para o funcionamento do PopUp
 document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("emailPopup");
+    const popup = document.getElementById("PopUpEmail");
     const closePopup = document.getElementById("closePopup");
     const submitEmail = document.getElementById("submitEmail");
     const emailInput = document.getElementById("emailInput");
 
     // Função para fechar o pop-up
     function closePopupFunction() {
+        //popup.style.visibility = 'hidden';
         popup.classList.add("hidden"); // Adiciona a classe "hidden" para esconder o pop-up
     }
 
@@ -74,7 +75,7 @@ async function BuscarQualidade(lat, lon) {
 
 // Função para o PopUp
 document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("emailPopup");
+    const popup = document.getElementById("PopUpEmail");
     const closePopup = document.getElementById("closePopup");
     const submitEmail = document.getElementById("submitEmail");
     const emailInput = document.getElementById("emailInput");
