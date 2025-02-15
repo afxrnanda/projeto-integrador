@@ -104,10 +104,10 @@ header ul li {
     right: 10px;
     background: none;
     border: none;
-    font-size: 18px; /* Reduzi o tamanho do X */
+    font-size: 16px;
     cursor: pointer;
     color: #5F7470;
-    padding: 5px; /* Adicionei um padding menor para melhorar o clique */
+    padding: 5px; 
 }
 
 .close-btn:hover {
