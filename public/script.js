@@ -81,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-
 // Função para buscar a qualidade do ar
 async function BuscarQualidade(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${Nossa_chave}`;
