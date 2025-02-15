@@ -36,19 +36,20 @@
         </div>
     </section>
 
-       <!-- Pop-Up-->
-     <div id="PopUpEmail" class="popup-overlay">
+       <!--PopUp-->
+    <div id="PopUpEmail" class="popup-overlay">
         <div class="popup-content">
-            <form action="/subscribe" method="post">
-                <h2> Receba atualizações do AirTrack! </h2>
-                <p> Insira seu e-mail para receber notícias e alertas sobre a qualidade do ar. </p>
-                <input name="email" type="email" id="emailinput" placeholder="Digite seu e-mail" required>
-                <button id="submitEmail" type="submit"> Inscrever-se </button>
-                <button id="closePopup"> Fechar </button>
+            <form action="/subscribe" method="post"> 
+            <!-- Botão de fechar (X) -->
+            <button id="closePopup" class="close-btn">×</button>
+            <h2>Inscreva-se</h2>
+            <input type="email" id="emailInput" placeholder="Digite seu e-mail" />
+            <div class="button-container">
+                <button id="submitEmail">Inscrever-se</button>
+            </div>
             </form>
         </div>
-     </div>
-   
+    </div> 
 
     <!-- Seção de Qualidade do Ar -->
     <section id="air-quality" class="section">
