@@ -33,11 +33,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const closePopup = document.getElementById("closePopup");
     const submitEmail = document.getElementById("submitEmail");
     const emailInput = document.getElementById("emailInput");
+    const searchBtn = document.getElementById("search-btn");
+    const citySearch = document.getElementById("city-search");
 
     // Função para fechar o pop-up
     function closePopupFunction() {
-        //popup.style.visibility = 'hidden';
-        popup.classList.add("hidden"); // Adiciona a classe "hidden" para esconder o pop-up
+        popup.style.visibility = 'hidden'; // Oculta o pop-up
+        popup.style.opacity = '0'; // Define a opacidade como 0
+    }
+
+    // Função para abrir o pop-up
+    function openPopupFunction() {
+        popup.style.visibility = 'visible'; // Torna o pop-up visível
+        popup.style.opacity = '1'; // Define a opacidade como 1
     }
 
     // Fechar o pop-up ao clicar no botão "Fechar"
@@ -55,7 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Por favor, insira um e-mail válido.");
         }
     });
+
+    // Função de pesquisa
+    searchBtn.addEventListener("click", () => {
+        const city = citySearch.value.trim();
+
+        if (city) {
+            // Simulação de uma pesquisa bem-sucedida
+            console.log(`Pesquisando por: ${city}`);
+            // Aqui você pode adicionar a lógica para buscar os dados da cidade
+
+            // Exibir o PopUp após a pesquisa
+            openPopupFunction(); // Abre o pop-up
+        } else {
+            alert("Por favor, digite o nome da cidade.");
+        }
+    });
 });
+
 
 
 // Função para buscar a qualidade do ar
