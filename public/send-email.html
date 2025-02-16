@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Emails</title>
+</head>
+<body>
+    <h1>Enviar Emails em Massa</h1>
+    <button id="sendEmailButton">Enviar Emails</button>
+
+    <script>
+        // Função para enviar emails
+        async function sendEmails() {
+            const subject = "Assunto do Email"; // Defina o assunto aqui
+            const text = "Olá, isso é um teste de email em massa!"; // Defina o texto aqui
+
+            try {
+                const response = await fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ subject, text }),
+                });
+
+                const result = await response.json();
+                alert(result.message); // Exibe a mensagem de sucesso ou erro
+            } catch (error) {
+                console.error('Erro ao enviar emails:', error);
+                alert('Erro ao enviar emails. Verifique o console para mais detalhes.');
+            }
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById('sendEmailButton').addEventListener('click', sendEmails);
+    </script>
+</body>
+</html>

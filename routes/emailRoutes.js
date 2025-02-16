@@ -1,40 +1,81 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database/db')
+const path = require('path'); // Para manipular caminhos de arquivos
+const db = require('../database/db'); // Importar o banco de dados
+const { sendBulkEmail } = require('../services/emailService'); // Importar o serviço de email
 
-// Rota para salvar o e-mail
+// Rota para salvar o e-mail (mantida)
 router.post('/subscribe', (req, res) => {
     const { email } = req.body;
-  
+
     if (!email) {
-      return res.status(400).json({ error: 'E-mail é obrigatório.' });
+        return res.status(400).json({ error: 'E-mail é obrigatório.' });
     }
-  
+
     const query = `INSERT INTO emails (email) VALUES (?)`;
     db.run(query, [email], function (err) {
-      if (err) {
-        console.log(err)
-        if (err.message.includes('UNIQUE')) {
-          return res.status(409).json({ error: 'E-mail já cadastrado.' });
+        if (err) {
+            console.log(err);
+            if (err.message.includes('UNIQUE')) {
+                return res.status(409).json({ error: 'E-mail já cadastrado.' });
+            }
+            return res.status(500).json({ error: 'Erro ao salvar o e-mail.' });
         }
-        return res.status(500).json({ error: 'Erro ao salvar o e-mail.' });
-      }
-  
-      res.status(201).json({ message: 'E-mail cadastrado com sucesso!' });
+
+        res.status(201).json({ message: 'E-mail cadastrado com sucesso!' });
     });
-  });
-  
-  // Rota para listar e-mails (opcional)
-  router.get('/emails', (req, res) => {
+});
+
+// Rota para listar e-mails (mantida)
+router.get('/emails', (req, res) => {
     const query = `SELECT * FROM emails`;
-  
+
     db.all(query, [], (err, rows) => {
-      if (err) {
-        return res.status(500).json({ error: 'Erro ao buscar e-mails.' });
-      }
-  
-      res.json(rows);
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao buscar e-mails.' });
+        }
+
+        res.json(rows);
     });
-  });
-  
-  module.exports = router;
+});
+
+// Rota GET para a página de envio de emails (nova)
+router.get('/send-email', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/send-email.html')); // Envia o arquivo HTML
+});
+
+// Rota POST para enviar emails (mantida)
+router.post('/send-email', async (req, res) => {
+    try {
+        const emails = await getEmailsFromDatabase(); // Busca emails do banco de dados
+        const { subject, text } = req.body;
+
+        if (!subject || !text) {
+            return res.status(400).json({ message: 'Assunto e texto são obrigatórios.' });
+        }
+
+        // Envia o email para todos os destinatários
+        sendBulkEmail(emails, subject, text);
+
+        res.status(200).json({ message: 'Emails enviados com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao enviar emails:', error);
+        res.status(500).json({ message: 'Erro ao enviar emails.' });
+    }
+});
+
+// Função para buscar todos os emails (mantida)
+const getEmailsFromDatabase = () => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT email FROM emails', (err, rows) => {
+            if (err) {
+                reject(err);
+            } else {
+                const emails = rows.map(row => row.email); // Extrai apenas os emails
+                resolve(emails);
+            }
+        });
+    });
+};
+
+module.exports = router;
