@@ -38,30 +38,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para fechar o pop-up
     function closePopupFunction() {
-        popup.style.visibility = 'hidden'; // Oculta o pop-up
-        popup.style.opacity = '0'; // Define a opacidade como 0
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        emailInput.value = ''; 
     }
 
     // Função para abrir o pop-up
     function openPopupFunction() {
-        popup.style.visibility = 'visible'; // Torna o pop-up visível
-        popup.style.opacity = '1'; // Define a opacidade como 1
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
     }
 
     // Fechar o pop-up ao clicar no botão "Fechar"
-    closePopup.addEventListener("click", closePopupFunction);
+    closePopup.addEventListener("click", () => {
+        closePopupFunction();
+    });
 
     // Fechar o pop-up ao clicar no botão "Inscrever-se" (após validação)
-    submitEmail.addEventListener("click", () => {
-        const email = emailInput.value;
+    submitEmail.addEventListener("click", (e) => {
+        e.preventDefault(); // Evita o envio do formulário
+
+        const email = emailInput.value.trim();
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailPattern.test(email)) {
-            alert("Obrigado por se inscrever!");
-            closePopupFunction(); // Fecha o pop-up
-        } else {
-            alert("Por favor, insira um e-mail válido.");
+        if (!email) {
+            alert("Por favor, insira um e-mail.");
+            return;
         }
+
+        if (!emailPattern.test(email)) {
+            alert("Por favor, insira um e-mail válido.");
+            return;
+        }
+
+        // Simulação de verificação de e-mail já cadastrado
+        const emailsCadastrados = []; // Se quiser pode substituir por uma lista de emails já cadastrado
+        if (emailsCadastrados.includes(email)) {
+            alert("Este e-mail já está cadastrado.");
+            return;
+        }
+
+        alert("Obrigado por se inscrever!");
+        closePopupFunction();
     });
 
     // Função de pesquisa
@@ -69,12 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const city = citySearch.value.trim();
 
         if (city) {
-            // Simulação de uma pesquisa bem-sucedida
             console.log(`Pesquisando por: ${city}`);
-            // Aqui você pode adicionar a lógica para buscar os dados da cidade
-
-            // Exibir o PopUp após a pesquisa
-            openPopupFunction(); // Abre o pop-up
+            openPopupFunction(); // Abre o pop-up após a pesquisa
         } else {
             alert("Por favor, digite o nome da cidade.");
         }
