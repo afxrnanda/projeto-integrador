@@ -36,11 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchBtn = document.getElementById("search-btn");
     const citySearch = document.getElementById("city-search");
 
+    // Lista de e-mails já cadastrados (simulação)
+    let emailsCadastrados = [];
+
     // Função para fechar o pop-up
     function closePopupFunction() {
         popup.style.visibility = 'hidden';
         popup.style.opacity = '0';
-        emailInput.value = ''; 
+        emailInput.value = ''; // Limpa o campo de e-mail ao fechar
     }
 
     // Função para abrir o pop-up
@@ -71,12 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Simulação de verificação de e-mail já cadastrado
-        const emailsCadastrados = []; // Se quiser pode substituir por uma lista de emails já cadastrado
+        // Verifica se o e-mail já está cadastrado
         if (emailsCadastrados.includes(email)) {
             alert("Este e-mail já está cadastrado.");
             return;
         }
+
+        // Adiciona o e-mail à lista de cadastrados (simulação)
+        emailsCadastrados.push(email);
+        console.log("E-mails cadastrados:", emailsCadastrados); // Para depuração
 
         alert("Obrigado por se inscrever!");
         closePopupFunction();
@@ -94,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
 // Função para buscar a qualidade do ar
 async function BuscarQualidade(lat, lon) {
