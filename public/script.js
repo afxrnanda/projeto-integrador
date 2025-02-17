@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function closePopupFunction() {
         popup.style.visibility = 'hidden';
         popup.style.opacity = '0';
-        emailInput.value = ''; // Limpa o campo de e-mail ao fechar
+        emailInput.value = ''; 
     }
 
     // Função para abrir o pop-up
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Adiciona o e-mail à lista de cadastrados (simulação)
         emailsCadastrados.push(email);
-        console.log("E-mails cadastrados:", emailsCadastrados); // Para depuração
+        console.log("E-mails cadastrados:", emailsCadastrados); 
 
         alert("Obrigado por se inscrever!");
         closePopupFunction();
