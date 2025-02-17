@@ -97,7 +97,7 @@ header ul li {
     font-size: 16px;
 }
 
-/* Botão de fechar (X) */
+/* Estilo do botão de fechar (X) */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -106,12 +106,15 @@ header ul li {
     border: none;
     font-size: 16px;
     cursor: pointer;
-    color: #5F7470;
-    padding: 5px; 
+    color: #5F7470; 
+    padding: 5px;
+    transition: color 0.3s ease; 
 }
 
 .close-btn:hover {
-    color: #4a5e5b;
+    color: #333; 
+    background-color: rgba(0, 0, 0, 0.1); 
+    border-radius: 50%; 
 }
 
 /* Container do botão de Inscrever-se */
