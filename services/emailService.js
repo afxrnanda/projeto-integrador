@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 // Configuração do transporte (usando Gmail como exemplo)
 const transporter = nodemailer.createTransport({
-    service: 'Gmail', // Use 'Outlook' ou outro serviço, se necessário
+    service: 'Gmail', // Use 'Gmail' ou outro serviço, se necessário
     auth: {
         user: process.env.EMAIL_USER || 'airtrackinfos@gmail.com', // Email do remetente
         pass: process.env.EMAIL_PASS || 'rfycfqncqyouqdbd' // Senha do remetente (ou senha de app)

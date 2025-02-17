@@ -40,12 +40,12 @@ router.get('/emails', (req, res) => {
 });
 
 // Rota GET para a página de envio de emails (nova)
-router.get('/send-email', (req, res) => {
+router.get('/send-emails', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/send-email.html')); // Envia o arquivo HTML
 });
 
 // Rota POST para enviar emails (mantida)
-router.post('/send-email', async (req, res) => {
+router.post('/send-emails', async (req, res) => {
     try {
         const emails = await getEmailsFromDatabase(); // Busca emails do banco de dados
         const { subject, text } = req.body;
