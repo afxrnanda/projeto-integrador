@@ -22,19 +22,6 @@ router.post('/subscribe', (req, res) => {
     });
 });
 
-// Rota para listar e-mails (mantida)
-router.get('/emails', (req, res) => {
-    const query = `SELECT * FROM emails`;
-
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ error: 'Erro ao buscar e-mails.' });
-        }
-
-        res.json(rows);
-    });
-});
-
 // Rota GET para a página de envio de emails (nova)
 router.get('/send-emails', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/send-email.html')); // Envia o arquivo HTML
