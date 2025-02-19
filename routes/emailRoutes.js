@@ -8,10 +8,6 @@ const { sendBulkEmail } = require('../services/emailService'); // Importar o ser
 router.post('/subscribe', (req, res) => {
     const { email } = req.body;
 
-    if (!email) {
-        return res.status(400).json({ error: 'E-mail é obrigatório.' });
-    }
-
     const query = `INSERT INTO emails (email) VALUES (?)`;
     db.run(query, [email], function (err) {
         if (err) {
