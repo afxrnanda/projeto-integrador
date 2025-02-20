@@ -56,38 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
     closePopup.addEventListener("click", () => {
         closePopupFunction();
     });
-
-    // Fechar o pop-up ao clicar no botão "Inscrever-se" (após validação)
-    submitEmail.addEventListener("click", (e) => {
-        e.preventDefault(); // Evita o envio do formulário
-
-        const email = emailInput.value.trim();
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!email) {
-            alert("Por favor, insira um e-mail.");
-            return;
-        }
-
-        if (!emailPattern.test(email)) {
-            alert("Por favor, insira um e-mail válido.");
-            return;
-        }
-
-        // Verifica se o e-mail já está cadastrado
-        if (emailsCadastrados.includes(email)) {
-            alert("Este e-mail já está cadastrado.");
-            return;
-        }
-
-        // Adiciona o e-mail à lista de cadastrados (simulação)
-        emailsCadastrados.push(email);
-        console.log("E-mails cadastrados:", emailsCadastrados); 
-
-        alert("Obrigado por se inscrever!");
-        closePopupFunction();
-    });
-
     // Função de pesquisa
     searchBtn.addEventListener("click", () => {
         const city = citySearch.value.trim();
