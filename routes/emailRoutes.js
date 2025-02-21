@@ -7,12 +7,13 @@ const isValidEmail = require('../services/validaremailService')
 // Rota para salvar o e-mail (mantida)
 router.post('/subscribe', (req, res) => {
   const email = req.body.email?.trim();
-  const query = `INSERT INTO emails (email) VALUES (?)`;
+  const cidade = req.body.cidade
+  const query = `INSERT INTO emails (email, cidade) VALUES (?, ?)`;
 
   if (!email || !isValidEmail(email)) {
     return res.status(400).json({ error: "E-mail inválido." });
   }
-  db.run(query, [email], function (err) {
+  db.run(query, [email, cidade], function (err) {
     if (err) {
       console.log(err);
       if (err.message.includes('UNIQUE')) {
