@@ -1,22 +1,24 @@
 const nodemailer = require("nodemailer");
 const db = require("../database/db");
+const { buscarCoordenadas, buscarQualidadeDoAr, gerarRecomendacao } = require("./weatherService");
+
 require("dotenv").config();
 
 // Configuração do Nodemailer
 const transporter = nodemailer.createTransport({
-    service: "gmail", // Se usar outro provedor, ajuste aqui
+    service: "gmail",
     auth: {
-        user: 'airtrackinfos@gmail.com', // substitua pelo seu email
-        pass: 'rfycfqncqyouqdbd' // substitua pela sua senha
+        user: 'airtrackinfos@gmail.com',
+        pass: 'rfycfqncqyouqdbd'
     },
 });
 
 /**
- * Envia e-mails para todos os endereços armazenados no banco de dados.
+ * Envia e-mails personalizados baseados na qualidade do ar da cidade do usuário.
  */
 async function sendEmails() {
     return new Promise((resolve, reject) => {
-        db.all("SELECT email FROM emails", async (err, rows) => {
+        db.all("SELECT email, cidade FROM emails", async (err, rows) => {
             if (err) {
                 console.error("Erro ao buscar emails:", err);
                 reject(err);
@@ -26,24 +28,44 @@ async function sendEmails() {
             let resultados = [];
 
             for (const row of rows) {
+                console.log(`📡 Buscando dados para ${row.cidade}...`);
+
+                // 1️⃣ Buscar coordenadas da cidade
+                const coord = await buscarCoordenadas(row.cidade);
+                if (!coord) {
+                    console.error(`❌ Não foi possível encontrar coordenadas para ${row.cidade}`);
+                    continue;
+                }
+
+                // 2️⃣ Buscar qualidade do ar (AQI)
+                const aqi = await buscarQualidadeDoAr(coord.lat, coord.lon);
+                if (!aqi) {
+                    console.error(`❌ Falha ao obter dados de qualidade do ar para ${row.cidade}`);
+                    continue;
+                }
+
+                // 3️⃣ Gerar recomendação
+                const recomendacao = gerarRecomendacao(aqi);
+
                 try {
                     await transporter.sendMail({
                         from: process.env.EMAIL_USER,
                         to: row.email,
-                        subject: "Teste de E-mail",
-                        text: "Este é um teste do Nodemailer com SQLite.",
+                        subject: `🌎 Atualização da Qualidade do Ar em ${row.cidade}`,
+                        text: `Olá,\n\nAqui estão os dados atualizados para sua cidade (${row.cidade}):\n\n- Qualidade do ar: ${aqi}/5\n- Umidade: ${coord.humidity}%\n- Recomendação: ${recomendacao}\n\nFique atento às condições do ar!\n\nAtenciosamente,\nEquipe AirTrack.`,
                     });
-                    console.log(`✅ E-mail enviado para: ${row.email}`);
-                    resultados.push({ email: row.email, status: "Enviado" });
+
+                    console.log(`✅ E-mail enviado para ${row.email} - ${row.cidade}`);
+                    resultados.push({ email: row.email, cidade: row.cidade, status: "Enviado" });
                 } catch (error) {
-                    console.error(`❌ Erro ao enviar para ${row.email}:`, error.message);
-                    resultados.push({ email: row.email, status: "Erro", motivo: error.message });
+                    console.error(`❌ Erro ao enviar para ${row.email} (${row.cidade}):`, error.message);
+                    resultados.push({ email: row.email, cidade: row.cidade, status: "Erro", motivo: error.message });
                 }
             }
+
             resolve(resultados);
         });
     });
 }
 
-module.exports.sendEmails = sendEmails;
-
+module.exports = { sendEmails };
