@@ -13,9 +13,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-/**
- * Envia e-mails personalizados baseados na qualidade do ar da cidade do usuário.
- */
+// Envia e-mails personalizados baseados na qualidade do ar da cidade do usuário.
 async function sendEmails() {
     return new Promise((resolve, reject) => {
         db.all("SELECT email, cidade FROM emails", async (err, rows) => {
@@ -30,21 +28,21 @@ async function sendEmails() {
             for (const row of rows) {
                 console.log(`📡 Buscando dados para ${row.cidade}...`);
 
-                // 1️⃣ Buscar coordenadas da cidade
+                // Buscar coordenadas da cidade
                 const coord = await buscarCoordenadas(row.cidade);
                 if (!coord) {
                     console.error(`❌ Não foi possível encontrar coordenadas para ${row.cidade}`);
                     continue;
                 }
 
-                // 2️⃣ Buscar qualidade do ar (AQI)
+                // Buscar qualidade do ar (AQI)
                 const aqi = await buscarQualidadeDoAr(coord.lat, coord.lon);
                 if (!aqi) {
                     console.error(`❌ Falha ao obter dados de qualidade do ar para ${row.cidade}`);
                     continue;
                 }
 
-                // 3️⃣ Gerar recomendação
+                // Gerar recomendação
                 const recomendacao = gerarRecomendacao(aqi);
 
                 try {

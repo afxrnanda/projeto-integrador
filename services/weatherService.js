@@ -3,11 +3,6 @@ const fetch = require('node-fetch');
 const API_KEY = '9ab2a85cf7af47cd36504729e28e212d'; // Sua chave da API OpenWeather
 const API_URL = 'https://api.openweathermap.org/data/2.5';
 
-/**
- * Busca as coordenadas (latitude e longitude) de uma cidade.
- * @param {string} cidade Nome da cidade
- * @returns {Promise<{lat: number, lon: number, humidity: number}>}
- */
 async function buscarCoordenadas(cidade) {
     const url = `${API_URL}/weather?q=${cidade}&appid=${API_KEY}&units=metric`;
     
@@ -27,12 +22,6 @@ async function buscarCoordenadas(cidade) {
     }
 }
 
-/**
- * Busca a qualidade do ar com base na latitude e longitude.
- * @param {number} lat Latitude
- * @param {number} lon Longitude
- * @returns {Promise<number>} Índice de qualidade do ar (AQI)
- */
 async function buscarQualidadeDoAr(lat, lon) {
     const url = `${API_URL}/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
     
@@ -48,11 +37,6 @@ async function buscarQualidadeDoAr(lat, lon) {
     }
 }
 
-/**
- * Gera uma recomendação baseada no índice de qualidade do ar (AQI).
- * @param {number} aqi Índice de Qualidade do Ar
- * @returns {string} Mensagem de recomendação
- */
 function gerarRecomendacao(aqi) {
     switch (aqi) {
         case 1: return 'A qualidade do ar está boa. Pode aproveitar ao ar livre!';
