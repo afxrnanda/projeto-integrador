@@ -4,7 +4,7 @@ const emailService = require("../services/emailService.js");
 const db = require("../database/db");
 
 // Rota para enviar e-mails
-router.get("/send-emails", async (req, res) => {
+router.post("/send-emails", async (req, res) => {
     try {
         const resultado = await emailService.sendEmails();
         res.status(200).json({
